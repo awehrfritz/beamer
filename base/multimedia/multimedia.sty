@@ -73,6 +73,7 @@
 \define@key{multimedia}{inlinesound}[true]{\csname mm@inline#1\endcsname}
 \define@key{multimedia}{label}{\def\mm@label{#1}}
 \define@key{multimedia}{mimetype}{\def\mm@mimetype{#1}}
+\define@key{multimedia}{alt}{\def\mm@alt{#1}}
 \define@key{multimedia}{loop}[]{\def\mm@playmode{/Mode /Repeat}\def\mm@repeat{/Repeat true}}
 \define@key{multimedia}{mixsound}[true]{\def\mm@mix{/Mix #1}}
 \define@key{multimedia}{once}[]{\def\mm@playmode{/Mode /Once}}
@@ -229,6 +230,7 @@
     \mm@externalfalse%
     \mm@embedfalse%
     \let\mm@mimetype\@empty%
+    \let\mm@alt\@empty%
     \setkeys{multimedia}{#1}%
     \mm@setmimetype{#3}%
     \wd\@tempboxa=\@tempdima%
@@ -296,6 +298,7 @@
               /S /MCD
               /D \mm@fobj
               \ifx\mm@mimetype\@empty\else /CT (\mm@mimetype)\fi
+              \ifx\mm@alt\@empty\else /Alt [() (\pdf@escapestring{\mm@alt})]\fi
               /P <<
                 /Type /MediaPermissions
                 /TF (TEMPACCESS)
@@ -345,6 +348,7 @@
         \beamer@pdfannot useobjnum\mm@annotobj width \@tempdima height \@tempdimb depth \@tempdimc
         {
           /Subtype /Screen
+          \ifx\mm@alt\@empty\else /Contents (\pdf@escapestring{\mm@alt})\fi
           /P \beamer@pdfpageref\numexpr\ReadonlyShipoutCounter+1\relax\space 0 R
           /AP <<
             /N \the\beamer@pdflastxform\space 0 R
