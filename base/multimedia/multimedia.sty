@@ -304,6 +304,11 @@
                 /TF (TEMPACCESS)
               >>
             >>
+            % Play parameters (ISO 32000-2, Table 291). /A is left out on
+            % purpose: it doesn't start playback, it only says whether the
+            % player starts playing (true, the default) or paused once the
+            % annotation is activated. Activation itself comes from the
+            % rendition actions (/A and /AA /PO of the annotation).
             /P <<
               /Type /MediaPlayParams
               /BE <<
